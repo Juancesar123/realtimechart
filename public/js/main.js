@@ -258,7 +258,7 @@ $scope.dtOptions = DTOptionsBuilder.newOptions()
 });
 mainApp.controller("statistik",function(socket,DTColumnBuilder,DTOptionsBuilder,$scope,$http){
  $scope.labels = ["January", "February", "March", "April", "May", "June", "July","Agustus","september","oktober","november","desember"];
-  $scope.series = ['Upload','download'];
+  $scope.series = ['Upload Video','  download'];
   $scope.data=[];
   $scope.nama = [];
  /* $scope.data = [
