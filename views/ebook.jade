@@ -1,0 +1,20 @@
+html
+head
+body
+section.content-header
+          h1 Ebook
+            small preview
+          ol.breadcrumb
+            li: a(href='#'): i(class="fa fa-dashboard")  Dashboard
+            li.active Ebook
+        div.box-header
+button.btn.btn-primary(data-toggle="modal",data-target="#myModal"): i(class="fa fa-plus") Tambah Ebook
+button.btn.btn-danger(ng-click="hapus()"): i(class="fa fa-trash") Hapus Ebook
+div#myModal.modal.faded(role="dialog")
+  div.modal-dialog
+  div.modal-content
+      div.modal-header
+        button(type="button",class='close',data-dismiss="modal")&times
+        h4.modal-title Input Ebook
+      .modal-body: .form-group: label Nama
+	  div.modal-footer
