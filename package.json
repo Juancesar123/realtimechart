@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Juancesar123/chat#readme",
   "dependencies": {
     "express": "^4.13.4",
+    "express-dynamic-helpers-patch": "0.0.2",
     "jade": "^1.11.0",
     "multer": "^1.1.0"
   }

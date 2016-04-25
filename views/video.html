@@ -1,0 +1,137 @@
+<html>
+<head>
+</head>
+<body>
+<section class="content-header">
+          <h1>
+            Video Tutorial
+            <small>Preview</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Video Tutorial</li>
+          </ol>
+        </section>
+	<div class = "box box-primary">
+
+		<div class="box-header">
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Tambah Video</button>
+<button class="btn btn-danger" ><i class="fa fa-trash"></i> Hapus Video</button>
+</div>
+<div class="box-body">
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Input video</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+		<label>Judul video</label>
+		<input type="text" class="form-control" ng-model="judul">
+      </div>
+	   <div class="form-group">
+		<label>Pembuat video</label>
+		<input type="text" class="form-control" ng-model="nama">
+      </div>
+	   <div class="form-group">
+		<label> Url video</label>
+		<input type="text" class="form-control" ng-model="url">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        <button type="button" class="btn btn-primary" ng-click="tambah()"><i class="fa fa-send"></i> Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+ 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+	  <h4 class="modal-title">Edit video</h4>
+     </div>
+      <div class="modal-body">
+        <div class="form-group">
+		<label>Judul Video</label>
+		<input type="text" class="form-control" ng-model="judul">
+		<input type="hidden" class="form-control" ng-model="id">
+      </div>
+	   <div class="form-group">
+		<label> Nama Pembuat Video</label>
+		<input type="text" class="form-control" ng-model="nama">
+      </div>
+	   <div class="form-group">
+		<label> Url video</label>
+		<input type="text" class="form-control" ng-model="urlku">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        <button type="button" class="btn btn-primary" ng-click="actionedit()"><i class="fa fa-send"></i> Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+ 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+	  <h4 class="modal-title">View Video</h4>
+     </div>
+      <div class="modal-body">
+        <div class="form-group">
+		<label>Judul Video</label>
+		<input type="text" class="form-control" ng-model="judul" disabled>
+      </div>
+	  <div class="form-group">
+		<label>Nama Pembuat  Video</label>
+		<input type="text" class="form-control" ng-model="nama" disabled>
+      </div>
+	   <div class="form-group">
+		
+		<iframe src="{{url}}" width="560" height="315"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<table datatable="ng" dt-columns="dtColumns" dt-options="dtOptions"class="table table-bordered table-striped">
+<thead>
+<th><input type="checkbox" ng-click="checkall()"></th>
+<th>nama</th>
+<th>pembuat </th>
+<th>action</th>
+</thead>
+<tbody>
+<tr ng-repeat="item in video">
+ <td><input type="checkbox"  checklist-model="user.video" checklist-value="item._id" role></td>
+<td>{{item.nama}}</td>
+<td>{{item.pembuat}}</td>
+<td><button class="btn btn-success" data-toggle="modal" ng-click="edit(item)"data-target="#myModal1"><i class="fa fa-edit"></i> Edit Video</button>
+<button class="btn btn-primary" data-toggle="modal" ng-click="view(item)"data-target="#myModal2"><i class="fa fa-eye"></i> Lihat Video</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

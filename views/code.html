@@ -1,0 +1,137 @@
+<html>
+<head>
+</head>
+<body>
+<section class="content-header">
+          <h1>
+            Source Code
+            <small>Preview</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Source code</li>
+          </ol>
+        </section>
+		<div class = "box box-primary">
+
+		<div class="box-header">
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Tambah Source Code</button>
+<button class="btn btn-danger" ng-click="hapus()"><i class="fa fa-trash"></i> Hapus Source Code</button>
+</div>
+<div class="box-body">
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Input Source Code</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+		<label>Judul code</label>
+		<input type="text" class="form-control" ng-model="judul">
+      </div>
+	  <div class="form-group">
+		<label>Bahasa Pemrograman</label>
+		<input type="text" class="form-control" ng-model="bahasa">
+      </div>
+	   <div class="form-group">
+		<label> Source Code</label>
+		<textarea rows="12" class="form-control" ng-model="isi"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        <button type="button" class="btn btn-primary" ng-click="tambah()"><i class="fa fa-send"></i> Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+ 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+     <h4 class="modal-title">Edit code</h4>
+	 </div>
+      <div class="modal-body">
+       <div class="form-group">
+		<label>Judul code</label>
+		<input type="text" class="form-control" ng-model="judul">
+		<input type="hidden" class="form-control" ng-model="id">
+      </div>
+	  <div class="form-group">
+		<label>Bahasa Pemrograman</label>
+		<input type="text" class="form-control" ng-model="bahasa">
+      </div>
+	   <div class="form-group">
+		<label> Source Code</label>
+		<textarea rows="12" class="form-control" ng-model="isi"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        <button type="button" class="btn btn-primary" ng-click="actionedit()"><i class="fa fa-send"></i> Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">view Code</h4>
+ 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+     </div>
+      <div class="modal-body">
+       
+        <div class="form-group">
+		<label>Judul code</label>
+		<input type="text" class="form-control" ng-model="judul" disabled> 
+      </div>
+	  <div class="form-group">
+		<label>Bahasa Pemrograman</label>
+		<input type="text" class="form-control" ng-model="bahasa" disabled>
+      </div>
+	   <div class="form-group">
+		<label> Source Code</label>
+		<textarea rows="12" class="form-control" ng-model="isi"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<table datatable="ng" dt-columns="dtColumns" dt-options="dtOptions"class="table table-bordered table-striped">
+<thead>
+<th><input type="checkbox" ng-click="checkall()"></th>
+<th>Judul Ebook</th>
+<th>Bahasa pemrograman web </th>
+<th>action</th>
+</thead>
+<tbody>
+<tr ng-repeat="item in sourcecode">
+ <td><input type="checkbox"  checklist-model="user.hapuscode" checklist-value="item._id" role></td>
+<td>{{item.judul}}</td>
+<td>{{item.bahasa}}</td>
+<td><button class="btn btn-success" data-toggle="modal" ng-click="edit(item)"data-target="#myModal1"id="edit"><i class="fa fa-edit"> Edit Code</i></button>
+<button class="btn btn-primary" data-toggle="modal" ng-click="view(item)"data-target="#myModal2"><i class="fa fa-eye"></i> Lihat Code</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

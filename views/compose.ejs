@@ -1,0 +1,48 @@
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Tulis Pesan
+            <small>13 new messages</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li>Pesan</li>
+            <li class="active"><%=nama%></li>
+          </ol>
+        </section>
+		<div class="box box-primary">
+                <div class="box-header">
+                  <h3 class="box-title">Compose New Message</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="form-group">
+                    <input class="form-control" placeholder="To:" ng-model="to">
+                    <input class="form-control" ng-model="nama" ng-init="nama= uy">{{nama}}
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" placeholder="Subject:" ng-model="subject">
+                  </div>
+                  <div class="form-group">
+                    <textarea id="compose-textarea" class="form-control" style="height: 300px" ng-model="pesan">
+                    </textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="btn btn-default btn-file">
+                      <i class="fa fa-paperclip"></i> Attachment
+                      <input type="file" name="attachment" file-model="attachment">
+                    </div>
+                    <p class="help-block">Max. 32MB</p>
+                  </div>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                  <div class="pull-right">
+                    <button class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>
+                    <button class="btn btn-primary"  ng-click="kirim()"><i class="fa fa-envelope-o"></i> Send</button>
+                  </div>
+                  <button class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+                </div><!-- /.box-footer -->
+              </div><!-- /. box -->
+            </div><!-- /.col -->
+      
+        
