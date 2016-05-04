@@ -3,7 +3,7 @@
   <head >
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Latihan CRUD | Express</title>
+    <title>Gdevelop | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -45,12 +45,46 @@
 	<script src="/public/js/main.js"></script>
 <script>
 mainApp.controller("appctrl",function($http,$scope){
-$http.get("/").success(function(data){
-$scope.nama = data;
+		$scope.getdata1=function(){
+			$http.get("view_notif").success(function(msg){
+				$scope.video = msg;
+				socket.emit('view_notif',msg)
+			});
+		}
+		$scope.getdata=function(){
+			$http.get("get_notif").success(function(msg){
+				socket.emit("send_notif_pesan",msg);
+			});
+		}
+		$scope.getdata();
+		$scope.submit=function(){
+		var status = "lama";
+		$http.post("ubah_notif",{status:status}).success(function(){
+		$scope.getdata1();
+		});
+		}
+		$scope.getdata1();
+socket.on('add_notif', function(msg) {
+    $scope.$apply(function () {
+      $scope.notif1 = msg.length;
+ })
+  });
+  $scope.lihat_notif_pesan=function(){
+  $http.post("ubah_notif_pesan",{status:"lama"}).success(function(){
+  })
+  $http.get("get_pesan_li").success(function(msg){
+  $scope.pesan = msg;
+  $scope.getdata();
+  })
+  }
+  socket.on('terimapesan', function(msg) {
+    $scope.$apply(function () {
+      $scope.notif = msg.length;
+ })
+  });
 });
-})
 
-</script>	  
+</script>
 	  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -75,92 +109,42 @@ $scope.nama = data;
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-          <div class="navbar-custom-menu">
+          <div class="navbar-custom-menu" ng-controller="appctrl">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a ng-click="lihat_notif_pesan()" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success">4</span>
+                  <span class="label label-success">{{notif}}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 4 messages</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li><!-- start message -->
+                    <ul class="menu" >
+                      <li ng-repeat="item in pesan"><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img ng-src="{{item.gambar}}" class="img-circle" alt="User Image">
                           </div>
                           <h4>
-                            Support Team
-                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                            {{item.from}}
+                            <small><i class="fa fa-clock-o"></i> {{item.tanggalkirim}}</small>
                           </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li><!-- end message -->
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            AdminLTE Design Team
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Developers
-                            <small><i class="fa fa-clock-o"></i> Today</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Sales Department
-                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Reviewers
-                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                    </ul>
+                          <p>{{item.isipesan}}</p>
+						  </ul>
                   </li>
                   <li class="footer"><a href="#">See All Messages</a></li>
                 </ul>
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
-              <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <li class="dropdown notifications-menu" >
+                <a ng-click="submit()" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
+                  <span class="label label-warning">{{notif1}}</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">You have 10 notifications</li>
+                  <li class="header">You have {{notif1}} notifications</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
@@ -194,7 +178,7 @@ $scope.nama = data;
                   <li class="footer"><a href="#">View all</a></li>
                 </ul>
               </li>
-			  
+
               <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu" >
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -281,7 +265,7 @@ $scope.nama = data;
                     </p>
                   </li>
                   <!-- Menu Body -->
-				  
+
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
                       <a href="#">Followers</a>
@@ -313,7 +297,7 @@ $scope.nama = data;
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
+      <aside class="main-sidebar" >
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
@@ -327,36 +311,41 @@ $scope.nama = data;
             </div>
           </div>
           <!-- search form -->
-          
+
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
+          <ul class="sidebar-menu" ng-controller="appctrl">
             <li class="header">MAIN NAVIGATION</li>
-         
+
 			  <li>
               <a href="#/ebook">
                 <i class="fa fa-file-pdf-o"></i> <span>Ebook</span>
                 <small class="label pull-right bg-red">3</small>
               </a>
             </li>
-			
+
 			  <li>
               <a href="#/video">
                 <i class="fa fa-youtube-play"></i> <span>Video Tutorial</span>
-                <small class="label pull-right bg-red">3</small>
+
               </a>
             </li>
         <li>
               <a href="#/code">
                 <i class="fa fa-code"></i> <span>Source Code</span>
-                <small class="label pull-right bg-red">3</small>
+              </a>
+            </li>
+			 <li>
+              <a href="#/code">
+                <i class="fa fa-youtube-play"></i> <span>Seminar Online</span>
+
               </a>
             </li>
 			 <li class="treeview">
               <a href="">
                 <i class="fa fa-bar-chart-o"></i>
-                <span>Data Statistik</span>
-                <span class="label label-primary pull-right">4</span>
+                <span>Realtime Statistik</span>
+                <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="#/statistik"><i class="fa fa-circle-o"></i> Upload</a></li>
@@ -367,16 +356,16 @@ $scope.nama = data;
               <a href="">
                 <i class="fa fa-envelope"></i>
                 <span>Pesan</span>
-                <span class="label label-primary pull-right">{{jumlah}}</span>
+                <span class="label label-primary pull-right">{{notif}}</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#/pesan"><i class="fa fa-inbox"></i> Inbox</a></li>
+                <li><a href="#/pesan"><i class="fa fa-inbox"></i> Inbox <span class="label label-primary pull-right">{{notif}}</span></a></li>
                 <li><a href="#/tulis"><i class="fa fa-envelope"></i> Tulis Pesan</a></li>
                 <li><a href="#/terkirim"><i class="fa fa-envelope-o"></i> Pesan Terkirim</a></li>
                 <li><a href="#/trash"><i class="fa fa-trash"></i> Tempat Sampah</a></li>
               </ul>
             </li>
-		
+
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -385,18 +374,18 @@ $scope.nama = data;
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        
+
 
         <!-- Main content -->
         <section class="content">
           <!-- Small boxes (Stat box) -->
-       
+
           <div class="row">
             <!-- Left col -->
 			<div class="col-xs-12">
-  
+
 	<div ng-view></div>
-	
+
 	</div>
 </div>
         </section><!-- /.content -->
@@ -576,9 +565,9 @@ $scope.nama = data;
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-   
+
 	  <script src="public/js/socket.io.js"></script>
-  
+
     <script>
       var socket = io();
       $('form').submit(function(){

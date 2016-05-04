@@ -11,7 +11,9 @@
         </section>
 		<div class="box box-primary">
 		<div class="box-header">
-		</div>
+      <button class="btn btn-danger" ng-click="hapus()"><i class="fa fa-trash"></i> Tempat Sampah</button>
+      <buton class="btn btn-primary" ng-click="tes()">tes</button>
+    </div>
 		<div class="box-body">
 		<table datatable="ng" dt-columns="dtColumns" dt-options="dtOptions"class="table table-bordered table-striped">
 <thead>
@@ -23,10 +25,10 @@
 </thead>
 <tbody>
 <tr ng-repeat="item in inbox">
- <td><input type="checkbox"  checklist-model="user.inbox" checklist-value="item._id" role></td>
-<td>{{item.dari}}</td>
+ <td><input type="checkbox"  checklist-model="user.hapusinbox" checklist-value="item" role></td>
+<td>{{item.from}}</td>
 <td>{{item.isipesan}}</td>
-<td>{{item.tanggalditerima}}</td>
+<td>{{item.tanggalkirim}}</td>
 <td><button class="btn btn-success" data-toggle="modal" ng-click="edit(item)"data-target="#myModal1"id="edit"><i class="fa fa-edit"></i></button>
 <button class="btn btn-primary" data-toggle="modal" ng-click="view(item)"data-target="#myModal2"><i class="fa fa-eye"></i></button></td>
 </tr>

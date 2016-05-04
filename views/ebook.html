@@ -64,7 +64,7 @@
         <div class="form-group">
 		<label>Judul Ebook</label>
 		<input type="text" class="form-control" ng-model="judul">
-		<input type="text" class="form-control" ng-model="id">
+		<input type="hidden" class="form-control" ng-model="id">
       </div>
 	   <div class="form-group">
 		<label>Nama Penulis</label>
@@ -120,7 +120,7 @@
 </thead>
 <tbody>
 <tr ng-repeat="item in ebook">
- <td><input type="checkbox"  checklist-model="user.hapusebook" checklist-value="item._id" role></td>
+ <td><input type="checkbox"  checklist-model="user.hapusebook" checklist-value="item" role></td>
 <td>{{item.nama}}</td>
 <td>{{item.namapenulis}}</td>
 <td><button class="btn btn-success" data-toggle="modal" ng-click="edit(item)"data-target="#myModal1"id="edit"><i class="fa fa-edit"></i></button>

@@ -16,7 +16,7 @@
 
 		<div class="box-header">
 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Tambah Video</button>
-<button class="btn btn-danger" ><i class="fa fa-trash"></i> Hapus Video</button>
+<button class="btn btn-danger" ng-click="hapus()"><i class="fa fa-trash"></i> Hapus Video</button>
 </div>
 <div class="box-body">
 <div id="myModal" class="modal fade" role="dialog">
@@ -123,7 +123,7 @@
 </thead>
 <tbody>
 <tr ng-repeat="item in video">
- <td><input type="checkbox"  checklist-model="user.video" checklist-value="item._id" role></td>
+ <td><input type="checkbox"  checklist-model="user.hapusvideo" checklist-value="item._id" role></td>
 <td>{{item.nama}}</td>
 <td>{{item.pembuat}}</td>
 <td><button class="btn btn-success" data-toggle="modal" ng-click="edit(item)"data-target="#myModal1"><i class="fa fa-edit"></i> Edit Video</button>

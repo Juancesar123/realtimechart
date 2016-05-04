@@ -1,0 +1,39 @@
+<section class="content-header">
+          <h1>
+            Tempat Sampah
+            <small>Preview</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li>Mail Box</li>
+            <li class="active">Tempat Sampah</li>
+          </ol>
+        </section>
+		<div class="box box-primary">
+		<div class="box-header">
+		<button class="btn btn-danger" ng-click="hapus()"><i class="fa fa-trash"> Hapus Permanen</i></button>
+		<button class="btn btn-warning" ng-click="pulihkan()"><i class="fa fa-refresh"> Pulihkan</i></button>
+		</div>
+		<div class="box-body">
+		<table datatable="ng" dt-columns="dtColumns" dt-options="dtOptions"class="table table-bordered table-striped">
+<thead>
+<th><input type="checkbox" ng-click="checkall()"></th>
+<th>dari</th>
+<th>isi pesan</th>
+<th>Tanggal Terkirim</th>
+<th>action</th>
+</thead>
+<tbody>
+<tr ng-repeat="item in terkirim">
+ <td><input type="checkbox"  checklist-model="user.hapussampah" checklist-value="item" role></td>
+<td>{{item.dari}}</td>
+<td>{{item.isipesan}}</td>
+<td>{{item.tanggalterkirim}}</td>
+<td><button class="btn btn-success" data-toggle="modal" ng-click="edit(item)"data-target="#myModal1"id="edit"><i class="fa fa-edit"></i></button>
+<button class="btn btn-primary" data-toggle="modal" ng-click="view(item)"data-target="#myModal2"><i class="fa fa-eye"></i></button></td>
+</tr>
+</tbody>
+</table>
+
+		</div>
+		</div>
